@@ -1,0 +1,21 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "My personal portfolio website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "portfolio",
+    "resume",
+    "personal",
+    "hamza",
+    "tasneem"
+  ],
+  "author": "Hamza Tasneem",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
