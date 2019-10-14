@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Create Posts - Hamza Tasneem</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="/fonts/font_quicksand.css" rel="stylesheet">
+    <!-- <link href="/fonts/font_raleway.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/css/portfolio.css">
+</head>
+
+<body>
+    <div class="container">
+        <%- include ../includes/header_menu.ejs %>
+        <div class="main">
+            <%- include ../includes/sidebar.ejs %>
+            <div class=" portfolio-col portfolio-left-col ">
+
+                <div class="col-content">
+
+                    <div class="form_outer_extra">
+                        <fieldset>
+                            <legend>All Posts (<%= posts.length %>):</legend>
+
+                            <div class="single-post">
+                                <div class="post-element ">Post Title</div>
+                                <div class="post-element">Options</div>
+                            </div>
+
+                            <% posts.forEach(function(post){ %>
+                            <div class="single-post">
+                                <div class="post-element"><%= post.title %></div>
+                                <div class="post-element">
+                                    <a href="/posts/edit/<%= post._id %>">
+                                        <button class= "post-edit post-btn" post_id="<%= post._id %>">Edit</button>
+                                    </a>
+                                    <button class="post-delete post-btn" post_id="<%= post._id %>">Delete</button>
+                                </div>
+                            </div>
+                            <% }) %>
+                            <div></div>
+                            </br>
+                            <span id="status"></span>
+                        </fieldset>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/libs/jquery/jquery-3.4.1.min.js"></script>
+
+    <script>
+
+        $(".post-delete").click(function () {
+            let post_id = $(this).attr("post_id");
+            console.log(post_id);
+
+            $.ajax({
+                url: "/posts/delete",
+                type: "DELETE",
+                data: { post_id },
+                success: function (response) {
+                    $("#status").text(response.message);
+                    if (response.success) location = location      
+                },
+                error: function (error) {
+                    $("#status").text("Connection Error - Kindly try at a later time");
+                }
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>

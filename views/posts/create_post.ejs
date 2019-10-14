@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Create Posts - Hamza Tasneem</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="/fonts/font_quicksand.css" rel="stylesheet">
+    <link href="/fonts/font_raleway.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/portfolio.css">
+</head>
+
+<body>
+    <div class="container">
+        <%- include ../includes/header_menu.ejs %>
+        <div class="main">
+                <%- include ../includes/sidebar.ejs %>
+            <div class=" portfolio-col portfolio-left-col ">
+
+                <div class="col-content">
+
+                    <form class="form_outer" id="uploadForm" enctype="multipart/form-data" action="/posts/create"
+                        method="POST">
+                        <fieldset>
+                            <legend>Personal information:</legend>
+                            Title:<br>
+                            <input type="text" name="title" value=""><br>
+                            Description:<br>
+                            <textarea name="description" rows="10" value=""></textarea><br>
+
+                            <div class="file_upload_box">
+                                <div class="file_upload_box_left">
+                                    <label class="myLabel">
+                                        <input type="file" name="featured_image" value=""
+                                            accept="image/x-png,image/gif,image/jpeg" />
+                                        <span>Select Featured Image:</span>
+                                    </label>
+                                    <div class="image_preview"></div>
+                                </div>
+                                <div class="file_upload_box_right">
+                                </div>
+                            </div>
+
+                            <div class="file_upload_box">
+                                <div class="file_upload_box_left">
+                                    <label class="myLabel">
+                                        <input type="file" type="file" name="userPhoto" value="" multiple
+                                            accept="image/x-png,image/gif,image/jpeg" />
+                                        <span>Select Post Images:</span>
+                                    </label>
+                                    <div class="image_preview"></div>
+                                </div>
+                                <div class="file_upload_box_right">
+
+                                </div>
+                            </div>
+
+                            <input name="submit" type="submit" value="Create">
+
+                            <span id="status"></span>
+                        </fieldset>
+                    </form>
+
+
+                </div>
+            </div>
+            <div class="portfolio-col"></div>
+        </div>
+    </div>
+
+    <script src="/libs/jquery/jquery-3.4.1.min.js"></script>
+    <script src="/libs/jquery/jquery.form.min.js"></script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#uploadForm').submit(function () {
+                let x = $('input[name="featured_image"]');
+                console.log("clicked");
+
+                $("#status").empty().text(x);
+                // let text = (!$('input[name="featured_image"]')) ? "Fesatured Image is required": "";
+                // $("#status").empty().text(text+ "...");
+
+                var $fileUpload = $("input[name='userPhoto']");
+                if (parseInt($fileUpload.get(0).files.length) > 2) {
+                    $("#status").empty().text("You can only upload a maximum of 2 images per post");
+                    return false;
+                }
+                $("#status").empty().text("File is uploading...");
+
+                //making a FormData from Form
+                let fd = new FormData(this);
+                const featured_image_required = ($('input[name="featured_image"]').attr("required")) ? true : false;
+                fd.append("featured_image_required", featured_image_required);
+                //submitiing the form 
+                $.ajax({
+                    url: "/posts/create",
+                    method: "POST",
+                    contentType: false,
+                    processData: false,
+                    type: "POST",
+                    cache: false,
+                    data: fd,
+                    success: function (response) {
+                        if (response.success) {
+                            $("#status").empty().text(response.message + ". Redirecting...");
+                            setTimeout(() => location = location, 2000);
+
+
+                        }
+                        else {
+                            $("#status").empty().text("An error occured while creating the post...");
+                        }
+
+                    },
+                    error: function (error) {
+                        $("#status").empty().text("Connection Error...");
+                    }
+                });
+
+                return false;
+            });
+        });
+
+        //Seting preview of images before uploading
+        $('input[type="file"]').on('change', function () {
+            let input = this;
+            let preview_area = $(this).parent().parent().children(".image_preview");
+            preview_area.html("");
+            if (input.files) {
+                var filesAmount = input.files.length;
+
+                for (i = 0; i < filesAmount; i++) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (event) {
+
+                        $($.parseHTML('<img>')).addClass("icon").attr('src', event.target.result).appendTo(preview_area);
+                    }
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

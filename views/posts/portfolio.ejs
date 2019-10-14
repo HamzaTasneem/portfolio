@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>My portfolio - Hamza Tasneem</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="/fonts/font_quicksand.css" rel="stylesheet">
+    <link href="/fonts/font_raleway.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+    <div class="container">
+            <%- include ../includes/header_menu.ejs %>
+
+        <div class="main">
+            
+            <div class=" portfolio-col portfolio-left-col ">
+
+                <div class="col-content">
+
+                    <div class="posts">
+
+                        <%  posts.forEach(function(post){ %>
+
+                        <div class="post">
+                            <img class="post-img" src="<%=post.featured_image%>" alt="">
+                            <div class="post-description" post_id="<%= post._id %>">
+                                <div class="post-title"><%= post.title %></div>
+                            </div>
+                        </div>
+                        <% }); %>
+
+
+                        <!-- <div class="post">
+                            <img class="post-img" src="/img/portfolio/dissdash_feat.png" alt="">
+                            <div class="post-description">
+                                <div class="post-title">DISSDASH BLOG</div>
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <img class="post-img" src="/img/portfolio/retailbazar_feat.png" alt="">
+                            <div class="post-description">
+                                <div class="post-title">Retail Bazar</div>
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <img class="post-img" src="/img/portfolio/Html5ism_feat.png" alt="">
+                            <div class="post-description">
+                                <div class="post-title">HTML5ISM</div>
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <img class="post-img" src="/img/portfolio/Shaz_feat.png" alt="">
+                            <div class="post-description">
+                                <div class="post-title">SHAZ Player</div>
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <img class="post-img" src="/img/portfolio/heroes_feat2.png" alt="">
+                            <div class="post-description">
+                                <div class="post-title">Never Forger Our Heroes</div>
+                            </div>
+                        </div>
+
+                        <div class="post" disabled>
+                            <img class="post-img" src="/img/portfolio/uniminer_feat.png" alt="">
+                            <div class="post-description">
+                                <div class="post-title">UNIMINER</div>
+                            </div>
+                        </div> -->
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal_outer">
+        <div id="modal_inner">
+            <div id="modal_content">
+                <h2>SHAZ Player <i id="modal_close"></i></h2>
+                <div id="modal_secondry_content">
+                    <div class="modal_text_div">
+                        <p>SHAZ Player was made by me as a side project. At start it was made simply to run multiple
+                            formats of videos in multiple windows at a time and to gain more control over frame rate and
+                            other aspects of vedios. It turned out to be a complete database backed player with
+                            capability to stream vedios from file systems using p2p architecture. SHAZ Player is made
+                            from VLCJ - A library provided by the creators of VLC Player and hence uses same underlaying
+                            technology with some modifications to bend it according to our needs/requirements. <br />
+                            Category: Desktop Application, Side-Project <br />Technology Stack: Java SE, MySQL,
+                            WebSockets <br />External
+                            Libraries: VLCj </p>
+                    </div>
+                    <div class="modal_img_div">
+                        <img class="modal-img img1" src="/img/portfolio/Shaz_feat.png" alt="No Image Available">
+                        <img class="modal-img img2" src="/img/portfolio/Shaz_feat.png" alt="No Image Available">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById("modal_outer").ondblclick = function () {
+            document.getElementById("modal_outer").style.display = "none";
+        }
+
+        document.getElementById("modal_close").onclick = function () {
+            document.getElementById("modal_outer").style.display = "none";
+        }
+
+        var post_array = document.getElementsByClassName("post");
+        for (var i = 0; i < post_array.length; i++) {
+
+            post_array[i].onclick = function () {
+
+                let post_id = this.querySelector(".post-description ").getAttribute("post_id");
+                document.getElementById("modal_outer").style.display = "flex";
+                loadPost(post_id, this);
+            }
+        };
+
+        function loadPost(post_id, post_clicked) {
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = function (post_clicked) {
+                if (request.readyState === XMLHttpRequest.DONE) {
+                    if (request.status === 200) {
+                        let data = JSON.parse(request.response);
+                        if(data.err){
+                            console.log("Error Occured", data.message);
+                            document.querySelector("#modal_content > h2").childNodes[0].nodeValue = data.message;
+                            document.querySelector(".modal_text_div").innerHTML = "";
+                            document.querySelector(".modal_img_div > .img1").src = "/img/icons/icons8-close-window-50.png";
+                            document.querySelector(".modal_img_div > .img2").src = "/img/icons/icons8-close-window-50.png";
+                            return false;
+                        }
+                        document.querySelector("#modal_content > h2").childNodes[0].nodeValue = data.title;
+                        document.querySelector(".modal_text_div").innerHTML = data.description;
+                        if (data.images[0]) {
+                            document.querySelector(".modal_img_div > .img1").src = data.images[0];
+                            document.querySelector(".modal_img_div > .img2").src = data.images[1];
+                            return false;
+                        }
+
+                        document.querySelector(".modal_img_div > .img1").src = "/img/icons/icons8-close-window-50.png";
+                        document.querySelector(".modal_img_div > .img2").src = "/img/icons/icons8-close-window-50.png";
+                    }
+                    else {
+                        console.log("An Error Occured While Fetching The Post");
+                    }
+                }
+            };
+            request.open("POST", "/posts/getSinglePost", true);
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.send(JSON.stringify({ post_id: post_id }));
+        };
+
+    </script>
+
+</body>
+
+</html>

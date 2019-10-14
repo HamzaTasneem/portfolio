@@ -1,0 +1,6 @@
+{
+    "production": {
+        "MONGODB_URI": "mongodb://localhost:27017/portfolio",
+        "SESSION_SECRET": "***secret here***"
+    }
+}

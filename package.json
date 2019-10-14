@@ -4,7 +4,11 @@
   "description": "My personal portfolio website",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "loop": "nodemon app.js",
+    "test-loop": "SET \"NODE_ENV=test\" && mocha models/**/*.test.js",
+    "run_as_production": "SET \"NODE_ENV=production\" && nodemon app.js"
   },
   "keywords": [
     "portfolio",
@@ -16,6 +20,19 @@
   "author": "Hamza Tasneem",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "bcrypt": "^3.0.6",
+    "body-parser": "^1.19.0",
+    "connect-mongodb-session": "^2.2.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "express-validator": "^6.2.0",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.6.12",
+    "multer": "^1.4.2",
+    "node-input-validator": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
   }
 }

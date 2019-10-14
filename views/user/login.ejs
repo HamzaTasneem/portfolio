@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>User Login - Hamza Tasneem</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="/fonts/font_raleway.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/portfolio.css">
+</head>
+
+<body>
+    <div class="container">
+        <%- include ../includes/header_menu.ejs %>
+        <div class="main">
+            <div class=" portfolio-col portfolio-left-col ">
+
+                <div class="col-content">
+
+                    <form class="form_outer_extra" id="registerForm" method="POST">
+                        <fieldset>
+                            <legend>User Login Credentials:</legend>
+                            Email:<br>
+                            <input name="email" type="email" />
+                            Password: <br>
+                            <input name="password" type="password" />
+                            </br>
+                            <input name="submit" type="submit" value="Login" />
+                            </br>
+                            <span id="status"></span>
+                        </fieldset>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/libs/jquery/jquery-3.4.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#registerForm').submit(function (event) {
+
+                let fd = new FormData(this);
+                let data = {};
+                for (let input of fd.entries()) {
+                    data[input[0]] = input[1];
+                }
+                console.log(data);
+                $.post("/users/login", data, function (response) {
+                    
+                    if (response.success) {
+                        $("#status").empty().text(response.message).css("color", "green");
+                        location = response.redirect;
+
+                    }else{
+                        $("#status").empty().text(response.message).css("color", "red");
+                    }
+                })
+                    .fail(() => $("#status").empty().text("Connection Error...").css("color", "red"));
+
+
+                return false;
+            });
+        });
+
+
+    </script>
+
+</body>
+
+</html>

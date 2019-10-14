@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Register User - Hamza Tasneem</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+    <link href="/fonts/font_quicksand.css" rel="stylesheet">
+    <link href="/fonts/font_raleway.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/css/portfolio.css">
+</head>
+
+<body>
+    <div class="container">
+        <%- include ../includes/header_menu.ejs %>
+        <div class="main">
+            <%- include ../includes/sidebar.ejs %>
+            <div class=" portfolio-col portfolio-left-col ">
+
+                <div class="col-content">
+
+                    <form class="form_outer_extra" id="registerForm" method="POST">
+                        <fieldset>
+                            <legend>User Information:</legend>
+                            Name:<br>
+                            <input type="text" name="name" value="" placeholder="e.g. Hamza" />
+                            Email:<br>
+                            <input name="email" type="email" value="" placeholder="e.g. name@example.com" />
+                            Password: <br>
+                            <input name="password" type="password" value="" placeholder="Password min 8 characters" />
+                            Re-Type Password:
+                            <input name="repassword" type="password" value="" placeholder="Password min 8 characters"
+                                autocomplete="new-password" />
+
+                            <input name="submit" type="submit" value="Register" />
+
+                            <span id="status"></span>
+                        </fieldset>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/libs/jquery/jquery-3.4.1.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#registerForm').submit(function (event) {
+
+                let fd = new FormData(this);
+                let data = {};
+                for (let input of fd.entries()) {
+                    data[input[0]] = input[1];
+                }
+
+                $.post("/users/register", data, function (response) {
+                    $("#status").empty().text(response.message);
+                    if (!response.success) location = location
+                })
+                    .fail(() => $("#status").empty().text("Connection Error..."));
+
+
+                return false;
+            });
+        });
+
+
+    </script>
+
+</body>
+
+</html>
