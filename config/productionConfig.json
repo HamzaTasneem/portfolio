@@ -1,5 +1,6 @@
 {
     "production": {
+        "PORT": 80,
         "MONGODB_URI": "mongodb://localhost:27017/portfolio",
         "SESSION_SECRET": "***secret here***"
     }
