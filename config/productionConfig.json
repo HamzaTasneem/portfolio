@@ -1,7 +1,7 @@
 {
     "production": {
-        "PORT": 80,
-        "MONGODB_URI": "mongodb://localhost:27017/portfolio",
+        "PORT": 3000,
+        "MONGODB_URI": "mongodb+srv://hamza:thisismypassword@cluster0-6jyms.mongodb.net/test?retryWrites=true&w=majority",
         "SESSION_SECRET": "***secret here***"
     }
 }
