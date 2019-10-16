@@ -1,0 +1,568 @@
+/* General */
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100%;
+    margin: 0px;
+    background-color: #ecedf0;
+}
+
+/* body */
+
+.container {
+    display: flex;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+    flex-direction: column;
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    background-color: #ecedf0;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* elements */
+
+.nav, .main {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 100%;
+}
+
+.main {
+    height: auto;
+    padding: 5px 10%;
+}
+
+/* Navigation header */
+
+.nav {
+    height: 10%;
+    max-height: 10%;
+    color: black;
+}
+
+.nav a {
+    color: #000;
+}
+
+/* Nav logo */
+
+.nav .media {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+}
+
+.nav .media img {
+    border-radius: 10px;
+    width: 50px;
+    margin: auto;
+    margin-right: 10px;
+}
+
+.nav .media .media-body h4 {
+    margin: auto;
+    margin-bottom: 0px;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+.nav .media .media-body p {
+    margin: auto;
+    margin-bottom: 0px;
+}
+
+/* header Mobile */
+
+.header {
+    background-color: #fff;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .1);
+    width: 100%;
+    z-index: 3;
+}
+
+/* header menu */
+
+.header ul {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    text-align: center;
+    list-style: none;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 0px;
+    margin: 0px;
+}
+
+.header li {
+    width: 50%;
+    align-self: center;
+}
+
+.header li a {
+    display: block;
+    width: 100%;
+    padding: 15px 15px;
+    text-decoration: none;
+}
+
+.header li a:hover, .header .menu-btn:hover {
+    background-color: #ecedf0;
+    border-radius: 2px;
+    margin: 0px;
+}
+
+.header .logo {
+    display: block;
+    float: left;
+    font-size: 1em;
+    padding: 5px 20px;
+    text-decoration: none;
+    background-color: white !important;
+}
+
+/* menu */
+
+.header .menu {
+    clear: both;
+    max-height: 0;
+    transition: max-height .2s ease-out;
+}
+
+/* menu icon */
+
+.header .menu-icon {
+    cursor: pointer;
+    float: right;
+    padding: 28px 20px;
+    position: relative;
+    user-select: none;
+}
+
+.header .menu-icon .navicon {
+    background: #333;
+    display: block;
+    height: 2px;
+    position: relative;
+    transition: background .2s ease-out;
+    width: 18px;
+}
+
+.header .menu-icon .navicon:before, .header .menu-icon .navicon:after {
+    background: #333;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+    top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+    top: -5px;
+}
+
+/* menu btn */
+
+.header .menu-btn {
+    display: none;
+}
+
+.header .menu-btn:checked~.menu {
+    max-height: 250px;
+}
+
+.header .menu-btn:checked~.menu-icon .navicon {
+    background: transparent;
+}
+
+.header .menu-btn:checked~.menu-icon .navicon:before {
+    transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked~.menu-icon .navicon:after {
+    transform: rotate(45deg);
+}
+
+.header .menu-btn:checked~.menu-icon:not(.steps) .navicon:before, .header .menu-btn:checked~.menu-icon:not(.steps) .navicon:after {
+    top: 0;
+}
+
+/* .container> in .main */
+
+.portfolio-col {
+    flex: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    flex-direction: column;
+    color: black;
+    background-color: transparent;
+}
+
+.col-content {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+}
+
+/*********************************************/
+
+.portfolio-left-col {
+    /* flex: 80%; */
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-left-col .col-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-left-col .col-content h2 {
+    width: 100%;
+    align-self: flex-start;
+    font-family: 'Raleway', sans-serif;
+    padding-left: 5%;
+    margin-bottom: 10px;
+}
+
+.posts {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0px 10px;
+}
+
+.post {
+    display: flex;
+    flex: 30.33%;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: nowrap;
+    height: 240px;
+    max-height: 240px;
+    max-width: 344px;
+    min-width: 315px;
+    padding: 5px;
+    margin: 10px 10px;
+    background-color: white;
+    border: 1px solid #d6d7da;
+    border-radius: 3px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 1px 3px 0px;
+}
+
+.post:hover {
+    background-color: #ece9e9;
+    cursor: pointer;
+}
+
+.post-img {
+    flex: 100%;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    border: 1px solid #d6d7da;
+}
+
+.post-description {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    line-height: 1.5;
+    padding: 5px 3px;
+}
+
+.post-title {
+    padding: 5px 5px 5px 0px;
+    font-size: 0.9em;
+}
+
+.post-attrs {
+    font-size: 0.8em;
+    font-weight: 400;
+}
+
+.portfolio-right-col {
+    flex: 20%;
+}
+
+/* Form Styling */
+
+#uploadForm {
+    display: flex;
+    flex: 80%;
+    width: 80%;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+fieldset input, fieldset textarea {
+    flex: 100%;
+    width: 100%;
+    padding: 5px;
+    font-family: inherit;
+    font-size: 0.9em;
+}
+input[type=file] {
+    padding: 5px 0px;
+}
+.icon {
+    height: 60px;
+    width: 90px;
+    margin: 5px;
+}
+.post_images img{
+    display: inline-block;
+}
+
+/*Form's Files Styling*/
+label.myLabel input[type="file"] {
+    position:absolute;
+    top: -1000px;
+}
+
+/***** Example custom styling *****/
+.myLabel {
+    border: 2px solid #AAA;
+    border-radius: 4px;
+    padding: 2px 5px;
+    margin: 2px;
+    background: #DDD;
+    display: inline-block;
+}
+.myLabel:hover {
+    background: #CCC;
+}
+.myLabel:active {
+    background: #CCF;
+}
+.myLabel :invalid + span {
+    color: #A44;
+}
+.myLabel :valid + span {
+    color: #4A4;
+}
+.file_upload_box{
+    display: flex;
+    flex-direction: row;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+}
+.file_upload_box_left, .file_upload_box_right {
+    flex:50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+/* **************** portfolio sidebar *************/
+.portfolio-sidebar{
+    align-self: left;
+    align-content: center;
+    align-items: center;
+}
+.sidebar-content{
+    background-color: #1e1e1e;
+    width: 100%;
+    height:
+    100%;
+}
+
+/* ************************************************ */
+/* Overlay style */
+
+#modal_outer {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    background-color: rgba(4, 4, 4, 0.5);
+    margin: 0px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+#modal_inner {
+    width: 80%;
+    height: 80%;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 1);
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    align-content: flex-start;
+}
+
+#modal_content {
+    flex: 100%;
+    height: 100%;
+    padding: 2.5% 2.5% 5% 5%;
+    display: flex;
+    flex-direction: column;
+}
+
+#modal_content h2 {
+    border-bottom: 1px solid gray;
+    padding-bottom: 10px;
+}
+
+#modal_close {
+    text-align: right;
+    font-size: 0.5em;
+    float: right;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    background: url(/img/icons/icons8-close-window-50.png);
+    background: url(/img/icons/icons8-close-window-50.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#modal_secondry_content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.modal_text_div {
+    padding-right: 5%;
+    line-height: 1.75em;
+    flex: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-wrap: wrap;
+}
+
+.modal_img_div {
+    margin-block-end: 1em;
+    margin-block-start: 1em;
+    flex: 25%;
+    flex-wrap: wrap;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.modal-img {
+    height: 200px;
+    max-height: 240px;
+    max-width: 344px;
+    min-width: 315px;
+}
+
+/*********************************************/
+
+/* 48em = 768px for header*/
+@media (min-width: 54em) {
+    .header ul {
+        flex-direction: row;
+        justify-items: center;
+        align-items: center;
+        padding-right: 10px;
+        margin: 5px;
+    }
+    .header li {
+        float: left;
+        width: inherit;
+    }
+    .header li a {
+        padding: 20px 30px;
+    }
+    .header .menu {
+        clear: none;
+        float: right;
+        max-height: none;
+    }
+    .header .menu-icon {
+        display: none;
+    }
+}
+
+
+/* If width is less than 1024px | 64em for body/main */
+@media (max-width: 64em) {
+    body {
+        height: auto;
+    }
+    .portfolio-col, .portfolio-left-col, .portfolio-right-col {
+        flex: 100%;
+    }
+    .post {
+        flex: 47%;
+        padding: 10px;
+        margin: 10px;
+    }
+    .main {
+        margin: 10px 0px;
+        padding: 5px 5px;
+    }
+    #modal_outer, #modal_inner {
+        min-height: 100%;
+    }
+    #modal_content {
+        padding: 5% 5% 5% 5%;
+    }
+    #modal_inner {
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+    .modal_img_div {
+        display: flex;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 43.75em) {
+    .main {
+        padding: 5px 15%;
+    }
+    #modal_inner {
+        width: 90%;
+    }
+}
