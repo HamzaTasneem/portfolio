@@ -453,8 +453,7 @@ label.myLabel input[type="file"] {
     cursor: pointer;
     height: 20px;
     width: 20px;
-    background: url(/img/icons/icons8-close-window-50.png);
-    background: url(/img/icons/icons8-close-window-50.png);
+    background: url(/img/icons/cross.png);
     background-size: contain;
     background-repeat: no-repeat;
 }

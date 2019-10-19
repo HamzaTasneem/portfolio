@@ -34,50 +34,6 @@
                         </div>
                         <% }); %>
 
-
-                        <div class="post">
-                            <img class="post-img" src="/img/portfolio/dissdash_feat.png" alt="">
-                            <div class="post-description">
-                                <div class="post-title">DISSDASH BLOG</div>
-                            </div>
-                        </div>
-
-                        <div class="post">
-                            <img class="post-img" src="/img/portfolio/retailbazar_feat.png" alt="">
-                            <div class="post-description">
-                                <div class="post-title">Retail Bazar</div>
-                            </div>
-                        </div>
-
-                        <div class="post">
-                            <img class="post-img" src="/img/portfolio/Html5ism_feat.png" alt="">
-                            <div class="post-description">
-                                <div class="post-title">HTML5ISM</div>
-                            </div>
-                        </div>
-
-                        <div class="post">
-                            <img class="post-img" src="/img/portfolio/Shaz_feat.png" alt="">
-                            <div class="post-description">
-                                <div class="post-title">SHAZ Player</div>
-                            </div>
-                        </div>
-
-                        <div class="post">
-                            <img class="post-img" src="/img/portfolio/heroes_feat2.png" alt="">
-                            <div class="post-description">
-                                <div class="post-title">Never Forger Our Heroes</div>
-                            </div>
-                        </div>
-
-                        <div class="post" disabled>
-                            <img class="post-img" src="/img/portfolio/uniminer_feat.png" alt="">
-                            <div class="post-description">
-                                <div class="post-title">UNIMINER</div>
-                            </div>
-                        </div>
-
-
                     </div>
                 </div>
             </div>
@@ -87,22 +43,14 @@
     <div id="modal_outer">
         <div id="modal_inner">
             <div id="modal_content">
-                <h2>SHAZ Player <i id="modal_close"></i></h2>
+                <h2>Loading... <i id="modal_close"></i></h2>
                 <div id="modal_secondry_content">
                     <div class="modal_text_div">
-                        <p>SHAZ Player was made by me as a side project. At start it was made simply to run multiple
-                            formats of videos in multiple windows at a time and to gain more control over frame rate and
-                            other aspects of vedios. It turned out to be a complete database backed player with
-                            capability to stream vedios from file systems using p2p architecture. SHAZ Player is made
-                            from VLCJ - A library provided by the creators of VLC Player and hence uses same underlaying
-                            technology with some modifications to bend it according to our needs/requirements. <br />
-                            Category: Desktop Application, Side-Project <br />Technology Stack: Java SE, MySQL,
-                            WebSockets <br />External
-                            Libraries: VLCj </p>
+                        <p></p>
                     </div>
                     <div class="modal_img_div">
-                        <img class="modal-img img1" src="/img/portfolio/Shaz_feat.png" alt="No Image Available">
-                        <img class="modal-img img2" src="/img/portfolio/Shaz_feat.png" alt="No Image Available">
+                        <img class="modal-img img1" src="" alt="No Image Available">
+                        <img class="modal-img img2" src="" alt="No Image Available">
                     </div>
                 </div>
 
@@ -148,6 +96,7 @@
                         document.querySelector("#modal_content > h2").childNodes[0].nodeValue = data.title;
                         document.querySelector(".modal_text_div").innerHTML = data.description;
                         if (data.images[0]) {
+                            console.log(data.images);
                             document.querySelector(".modal_img_div > .img1").src = data.images[0];
                             document.querySelector(".modal_img_div > .img2").src = data.images[1];
                             return false;
