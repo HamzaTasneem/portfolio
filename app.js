@@ -14,6 +14,7 @@ const { mongoose } = require("./middleware/mongoose");
 const { postRouter } = require("./routes/posts");
 const { sendError, sendErrorPage } = require("./routes/errors");
 const { userRouter } = require("./routes/users");
+const Post = require("./models/posts/posts_model");
 
 //initializing app variables
 const app = express();
@@ -23,6 +24,7 @@ const store = new mongoDBStore({ uri: process.env.MONGODB_URI, collection: "sess
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+
 //setting up express-session
 app.use(session({
     secret: process.env.SESSION_SECRET,
@@ -39,7 +41,12 @@ const port = process.env.PORT;
 
 //Initializing routes
 app.get("/", (req, res, next) => {
-    res.redirect("/posts/view");
+    Post.find({}).then(posts => {
+        res.render("posts/portfolio.ejs", { posts });
+    }).catch(err => {
+        console.log(err);
+        res.send({ message: "An error occured while fetching the posts", file: post_controller, err: true });
+    });
 });
 
 app.use("/users", userRouter);
