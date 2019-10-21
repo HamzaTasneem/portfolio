@@ -2,4 +2,4 @@ public/uploads/**
 node_modules
 config/config.json
 steps.txt
-
+.htaccess
