@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "loop": "nodemon app.js",
     "test-loop": "SET \"NODE_ENV=test\" && mocha models/**/*.test.js",
-    "run_as_production": "SET \"NODE_ENV=production\" && nodemon app.js"
+    "runDev": "SET \"NODE_ENV=development\" && nodemon app.js"
   },
   "keywords": [
     "portfolio",

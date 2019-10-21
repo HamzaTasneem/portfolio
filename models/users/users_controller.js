@@ -36,6 +36,9 @@ module.exports.postUser = async (req, res, next) => {
 
 //getting login page
 module.exports.getLogin = (req, res, next) => {
+    if(req.session.user){
+        return res.redirect("/posts/list");
+    }
     res.render("user/login.ejs", {});
 };
 

@@ -14,10 +14,10 @@
 
 <body>
     <div class="container">
-            <%- include ../includes/header_menu.ejs %>
+        <%- include ../includes/header_menu.ejs %>
 
         <div class="main">
-            
+
             <div class=" portfolio-col portfolio-left-col ">
 
                 <div class="col-content">
@@ -43,10 +43,10 @@
     <div id="modal_outer">
         <div id="modal_inner">
             <div id="modal_content">
-                <h2>Loading... <i id="modal_close"></i></h2>
+                <h2> <i id="modal_close"></i></h2>
                 <div id="modal_secondry_content">
                     <div class="modal_text_div">
-                        <p></p>
+
                     </div>
                     <div class="modal_img_div">
                         <img class="modal-img img1" src="" alt="No Image Available">
@@ -74,8 +74,14 @@
             post_array[i].onclick = function () {
 
                 let post_id = this.querySelector(".post-description ").getAttribute("post_id");
+                document.querySelector("#modal_content > h2").childNodes[0].nodeValue = "Loading...";
+                document.querySelector(".modal_img_div > .img1").src = "/img/icons/imageLoad.gif";
+                document.querySelector(".modal_img_div > .img2").src = "/img/icons/imageLoad.gif";
+                document.querySelector(".modal_text_div").style.cssText = "height: 100%; justify-content: center; align-items: center; align-content: center;";
+                document.querySelector(".modal_text_div").innerHTML = '<img class="img-load" src="/img/icons/imageLoad.gif" alt="Loading..." />';
                 document.getElementById("modal_outer").style.display = "flex";
                 loadPost(post_id, this);
+
             }
         };
 
@@ -85,7 +91,7 @@
                 if (request.readyState === XMLHttpRequest.DONE) {
                     if (request.status === 200) {
                         let data = JSON.parse(request.response);
-                        if(data.err){
+                        if (data.err) {
                             console.log("Error Occured", data.message);
                             document.querySelector("#modal_content > h2").childNodes[0].nodeValue = data.message;
                             document.querySelector(".modal_text_div").innerHTML = "";
@@ -93,8 +99,10 @@
                             document.querySelector(".modal_img_div > .img2").src = "/img/icons/icons8-close-window-50.png";
                             return false;
                         }
+                        document.querySelector(".modal_text_div").style.cssText = "height: auto; justify-content: flex-start; align-items: flex-start; align-content: flex-start;";
                         document.querySelector("#modal_content > h2").childNodes[0].nodeValue = data.title;
                         document.querySelector(".modal_text_div").innerHTML = data.description;
+
                         if (data.images[0]) {
                             console.log(data.images);
                             document.querySelector(".modal_img_div > .img1").src = data.images[0];
