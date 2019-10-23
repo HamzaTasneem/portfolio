@@ -5,6 +5,7 @@
 }
 
 html, body {
+    height: 100%;
     min-height: 100%;
     margin: 0px;
     background-color: #ecedf0;
@@ -443,8 +444,8 @@ label.myLabel input[type="file"] {
 }
 
 #modal_inner {
-    width: 80%;
-    height: 80%;
+    width: 90%;
+    height: 90%;
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 1);
     font-family: 'Raleway', sans-serif;
